@@ -19,6 +19,9 @@
 				,"rust-lang.rust-analyzer"
 				,"tamasfe.even-better-toml"
 				,"rocq-prover.vsrocq"
+				,"alexkrechik.cucumberautocomplete"
+				,"tlaplus.vscode-ide"
+				,"tomoki1207.pdf"
 			]
 		}
 	}

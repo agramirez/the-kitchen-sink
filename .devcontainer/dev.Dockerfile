@@ -73,4 +73,7 @@ RUN eval `opam config env`
 
 RUN rustup default stable
 
+# install latex
+RUN sudo apt install -y texlive-full 
+
 CMD ["sleep","infinity"]
