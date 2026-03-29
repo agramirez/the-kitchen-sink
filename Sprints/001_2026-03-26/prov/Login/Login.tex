@@ -942,8 +942,28 @@
 \@x{}\moduleLeftDash\@xx{ {\MODULE} Login}\moduleRightDash\@xx{}%
 \@x{ {\VARIABLE} color}%
 \@pvspace{16.0pt}%
- \@x{ TypeOK \.{\defeq} color \.{\in} [\@w{red} ,\,\@w{green} ,\,\@w{yellow}
- ]}%
+\@x{ TypeOK \.{\defeq} color \.{\in} \{\@w{red} ,\,\@w{yellow} \}}%
+\@pvspace{8.0pt}%
+\@x{ AlwaysTypeOK \.{=} {\Box} TypeOK}%
+\@pvspace{8.0pt}%
+\@x{ Init \.{\defeq} color \.{=}\@w{red}}%
+\@pvspace{8.0pt}%
+\@x{ TurnGreen \.{\defeq}}%
+\@x{\@s{16.4} \.{\land} color \.{=}\@w{red}}%
+\@x{\@s{16.4} \.{\land} color \.{'} \.{=}\@w{green}}%
+\@x{ TurnYellow \.{\defeq}}%
+\@x{\@s{16.4} \.{\land} color \.{=}\@w{green}}%
+\@x{\@s{16.4} \.{\land} color \.{'} \.{=}\@w{yellow}}%
+\@x{ TurnRed \.{\defeq}}%
+\@x{\@s{16.4} \.{\land} color \.{=}\@w{yellow}}%
+\@x{\@s{16.4} \.{\land} color \.{'} \.{=}\@w{red}}%
+\@pvspace{8.0pt}%
+\@x{ Next \.{\defeq}}%
+\@x{\@s{16.4} \.{\lor} TurnGreen}%
+\@x{\@s{16.4} \.{\lor} TurnYellow}%
+\@x{\@s{16.4} \.{\lor} TurnRed}%
+\@pvspace{8.0pt}%
+\@x{ Spec \.{\defeq} Init \.{\lor} {\Box} [ Next ]_{ color}}%
 \@pvspace{8.0pt}%
 \@x{}\bottombar\@xx{}%
 \end{document}

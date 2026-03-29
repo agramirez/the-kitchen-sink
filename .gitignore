@@ -1,0 +1,24 @@
+# Ignore TLC model checking output files
+*.out
+*.dot
+*.toolbox/*.out
+*.toolbox/*.dot
+
+# Ignore TLA+ Toolbox configuration folders, except the model parameters
+*.toolbox/
+!*.toolbox/*.tla
+!*.toolbox/*.cfg
+!*.toolbox/*.launch
+!*.toolbox/*.properties
+!*.toolbox/*.json
+
+# Ignore temporary/generated files
+*.~
+*.class
+TLC.log
+
+# ignore trace logs
+*.tlc
+
+# ignore states folder
+states/
