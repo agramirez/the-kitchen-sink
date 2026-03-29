@@ -940,30 +940,43 @@
 \tlatex
 \setboolean{shading}{true}
 \@x{}\moduleLeftDash\@xx{ {\MODULE} Login}\moduleRightDash\@xx{}%
-\@x{ {\VARIABLE} color}%
+\@x{ {\VARIABLE} status}%
 \@pvspace{16.0pt}%
-\@x{ TypeOK \.{\defeq} color \.{\in} \{\@w{red} ,\,\@w{yellow} \}}%
+ \@x{ TypeOK \.{\defeq} status \.{\in} \{\@w{unregistered} ,\,\@w{validating}
+ ,\,\@w{verifying} ,\,\@w{registered} \}}%
 \@pvspace{8.0pt}%
-\@x{ AlwaysTypeOK \.{=} {\Box} TypeOK}%
+\@x{ AlwaysTypeOK \.{\defeq} {\Box} TypeOK}%
 \@pvspace{8.0pt}%
-\@x{ Init \.{\defeq} color \.{=}\@w{red}}%
+\@x{ Init \.{\defeq} status \.{=}\@w{unregistered}}%
 \@pvspace{8.0pt}%
-\@x{ TurnGreen \.{\defeq}}%
-\@x{\@s{16.4} \.{\land} color \.{=}\@w{red}}%
-\@x{\@s{16.4} \.{\land} color \.{'} \.{=}\@w{green}}%
-\@x{ TurnYellow \.{\defeq}}%
-\@x{\@s{16.4} \.{\land} color \.{=}\@w{green}}%
-\@x{\@s{16.4} \.{\land} color \.{'} \.{=}\@w{yellow}}%
-\@x{ TurnRed \.{\defeq}}%
-\@x{\@s{16.4} \.{\land} color \.{=}\@w{yellow}}%
-\@x{\@s{16.4} \.{\land} color \.{'} \.{=}\@w{red}}%
+\@x{ Register \.{\defeq}}%
+\@x{\@s{16.4} \.{\land} status \.{=}\@w{unregistered}}%
+\@x{\@s{16.4} \.{\land} status \.{'} \.{=}\@w{validating}}%
+\@x{ Validate \.{\defeq}}%
+\@x{\@s{16.4} \.{\land} status \.{=}\@w{validating}}%
+\@x{\@s{16.4} \.{\land} status \.{'} \.{=}\@w{verifying}}%
+\@x{ Verify \.{\defeq}}%
+\@x{\@s{16.4} \.{\land} status \.{=}\@w{verifying}}%
+\@x{\@s{16.4} \.{\land} status \.{'} \.{=}\@w{registered}}%
+\@pvspace{8.0pt}%
+ \@x{ Terminating \.{\defeq} status \.{=}\@w{registered} \.{\land}
+ {\UNCHANGED} status}%
 \@pvspace{8.0pt}%
 \@x{ Next \.{\defeq}}%
-\@x{\@s{16.4} \.{\lor} TurnGreen}%
-\@x{\@s{16.4} \.{\lor} TurnYellow}%
-\@x{\@s{16.4} \.{\lor} TurnRed}%
+\@x{\@s{16.4} \.{\lor} Register}%
+\@x{\@s{16.4} \.{\lor} Validate}%
+\@x{\@s{16.4} \.{\lor} Verify}%
+\@x{\@s{16.4} \.{\lor} Terminating}%
 \@pvspace{8.0pt}%
-\@x{ Spec \.{\defeq} Init \.{\lor} {\Box} [ Next ]_{ color}}%
+\@x{ Spec \.{\defeq} Init \.{\land} {\Box} [ Next ]_{ status}}%
+\@pvspace{8.0pt}%
+\@x{ Termination \.{\defeq} {\Diamond} ( status \.{=}\@w{registered} )}%
+\@pvspace{8.0pt}%
+\@x{}%
+\@y{\@s{0}%
+ Liveness \ensuremath{\.{\defeq} {\Diamond}(status \.{=} \@w{registered})
+}}%
+\@xx{}%
 \@pvspace{8.0pt}%
 \@x{}\bottombar\@xx{}%
 \end{document}

@@ -2,29 +2,34 @@
 VARIABLE status
 
 
-TypeOK == status \in {"red","green","yellow"}
+TypeOK == status \in {"unregistered","validating","verifying","registered"}
 
 AlwaysTypeOK == [] TypeOK
 
-Init == status = "red"
+Init == status = "unregistered"
 
 Register == 
-    /\ status = "red"
-    /\ status' = "green"
+    /\ status = "unregistered"
+    /\ status' = "validating"
 Validate ==
-    /\ status = "green"
-    /\ status' = "yellow"
+    /\ status = "validating"
+    /\ status' = "verifying"
 Verify ==
-    /\ status = "yellow"
-    /\ status' = "red"
+    /\ status = "verifying"
+    /\ status' = "registered"
+
+Done == status = "registered" /\ UNCHANGED status
 
 Next == 
     \/ Register 
     \/ Validate 
     \/ Verify
+    \/ Done
 
 Spec == Init /\ [][Next]_status
 
-\* Liveness == <>(status = "red")
+Termination == <>(status = "registered")
+
+\* Liveness == <>(status = "registered")
 
 ====
