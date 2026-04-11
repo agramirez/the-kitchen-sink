@@ -1,0 +1,51 @@
+@startuml
+left to right direction
+
+:Medical Professional: as med 
+
+package "Patients at a Glance" {
+    usecase activepatients as "
+        I want to see all my active patients for the day
+        So that I can know who I'll be meeting with
+    "
+    usecase triagestatus as "
+        I want to see my patient's triage status
+        So that I know who I should focus on
+    "
+    usecase meettype as "
+        I want to see my patient's meeting type
+        So that I know know how many phone, or in person, or video meetings I will have
+    "
+}
+
+package "Patient Details" {
+    usecase latestmessages as "
+        I want to see the patient chat messages when I click on their name
+        So that I know what we last chatted about
+    "
+    usecase lastnotes as "
+        I want to see the patient notes from the last time I saw the patient
+        So that I know what their last status
+    "
+}
+
+note right of "Patients at a Glance"
+    These are icons and summaries that can provide 
+    general information without having to dive into 
+    the details.
+end note
+
+note right of "Patient Details"
+    Once an icon or general link/status button is 
+    clicked then these specific actions and displays
+    are triggered.
+end note
+
+med --> activepatients
+med --> triagestatus
+med --> meettype
+
+med --> latestmessages
+med --> lastnotes
+
+@enduml

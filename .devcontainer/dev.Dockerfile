@@ -76,4 +76,10 @@ RUN rustup default stable
 # install latex
 RUN sudo apt install -y texlive-full 
 
+# install graphviz
+RUN sudo apt install -y graphviz
+
+# install plantuml
+RUN sudo apt install -y plantuml
+
 CMD ["sleep","infinity"]
