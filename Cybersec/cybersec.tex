@@ -2,15 +2,45 @@
 
 \usepackage{hyperref}
 \usepackage{import}
+\usepackage[toc,page]{appendix}
 
-\title{Cybersecurity Organization}
+\title{%
+    Cybersecurity Organization \\
+    \large Business Plan Strategy and Implementation
+}
 \author{Alexander G. Ramirez}
 
 \begin{document}
 \maketitle
 \tableofcontents
 
+\section{Introduction}
+
+This document will serve to provide evidence for an Agile Software Development
+methodology.  We will take the idea of a Cybersecurity Organization providing
+Business Plan and will use technologies to generate proofs, tools, help, etc to
+implement the businesses plan.
+
+It is intended as a ``living'' document, therefore it will be written and developed
+in \LaTeX{}.  This will allow us to break the project into pieces, allow us to reference
+those pieces in later work, provide good formatting capabilities, and perhaps
+most importantly; it will allow us to integrate code and processes directly into 
+the document.
+
+While the document will not be substitute for other technologies like project 
+management software, CI/CD pipelines, diagraming tools, and software development 
+IDEs it will provice a centralized location from where we can aggregate everything.
+Note that the itent of this franqly crazy idea, is to showcase my documentation
+skills.  Lol, if i can make this work, I can document anything, no?
+
+\input{modules/documentation.tex}
+
+
 \section{Ideas}
+
+In this section we will put forth general ideas, subprojects, concepts, or tasks
+that we will then formalize into a set of requirements to be implemented in some 
+tool or technology.
 
 \input{ideas/name}
 
@@ -18,8 +48,23 @@
 
 \input{requirements/name}
 
+\section{Design}
+
 \section{Implementation}
 
 \input{implementation/name}
+
+\break{}
+
+\begin{appendices}
+\section{Rationales, Reasons, Considerations and Justifications}
+
+\input{appendix/consideration/documentation-stack}
+
+\input{appendix/rationale/commontest.tex}
+
+\input{appendix/consideration/openapi.tex}
+
+\end{appendices}    
 
 \end{document}

@@ -1,0 +1,62 @@
+\subsection{Documentation}
+
+The document is split into the following sections:
+
+\begin{enumerate}
+    \item Ideas
+    \item Requirements
+    \item Design
+    \item Implementation
+    \item Deployment
+    \item Issue Resolution
+\end{enumerate}
+
+Note that while the process of taking an Idea all the way through to Deployment
+is cyclical each Module that is taken from start to finish of the cycle will be
+considered complete.
+
+\subsubsection{Ideas}
+
+In the ideas section we essentially have our introduction to the business problem
+and the proposed business solutions.  This section should include a high level 
+overview and should provide just enough information to be succinct and sufficient
+to extract meaningful and actionable business requirements to be described in the
+Requirements section.
+
+This section documents the ``what if?'' of an idea.  Later sections will document
+the ``why'', ``what'', ``how'', ``when'', ``did it?'', and ``is it?''.
+
+The ``did it?'' is particularly important in that it answer the question from 
+``if we do X then we will get Y?''.  This is evidence based design and should
+be considered a crucial step in ensuring that features and functionality actually
+achieve and produce some positive change.  If they don't, then a new solution
+or idea should be discussed and implemented.
+
+The \emph{``is it?''} is meant to categorize the unit, feature, and integration 
+tests.  Note that while unit tests will be developed for custom code, we will also
+have feature and integration tests for general software products.  For this 
+purpose we will use the \emph{Common Test} framework of the erlang programming
+language\footnote{See section \ref{sec:commontest}}.
+
+\subsubsection{Requirements}
+Once the general business problem and proposed solution have been documented, we 
+must extract formal requirements that will be used to deliver a functional solution.
+
+Note that we are not limiting ourselves to programming solutions, but rather, 
+technological solutions at the architectural level (i.e. the solution code be an off
+the shelf software product, deploying a virtual server, or writing custom source code).
+
+The requirements will be written primarily in the Agile style (As {\emph{User}} 
+I want {\emph{Feature}} to achive {\emph{Functionality}}).  Here \emph{User} can 
+be any role, person, or group.  It does not have to be something software specific.
+Similarly, the \emph{Functionality} does not have to be a custom built piece of 
+code, although it will be some IT feature, with possible some manual process to
+augment it.  The \emph{Functionality} will be the goal or result that we want to 
+achieve via the requested \emph{Feature}.  Note that the \emph{Feature} will 
+usually be some increase in efficiency, decrease in work/cost, or improvement
+to some company, group, or user.
+
+This section formalizes the ``what'' and the ``why''.
+
+\subsubsection{Design}
+
