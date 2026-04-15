@@ -82,4 +82,11 @@ RUN sudo apt install -y graphviz
 # install plantuml
 RUN sudo apt install -y plantuml
 
+# install dotnet
+RUN wget https://packages.microsoft.com/config/debian/13/packages-microsoft-prod.deb -O packages-microsoft-prod.deb && \
+    sudo dpkg -i packages-microsoft-prod.deb && \
+    rm packages-microsoft-prod.deb
+RUN sudo apt-get update && sudo apt-get install -y dotnet-sdk-10.0
+RUN sudo apt-get update && sudo apt-get install -y aspnetcore-runtime-10.0
+
 CMD ["sleep","infinity"]
