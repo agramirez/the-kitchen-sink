@@ -1,0 +1,51 @@
+\documentclass{report}
+
+\usepackage{hyperref}
+\usepackage{appendix}
+
+\title{System Requirements and Specifications \- \\ \large{MovieApp} }
+\author{Alexander G. Ramirez}
+\date{April 15th, 2026}
+
+\begin{document}
+\maketitle
+\tableofcontents
+
+\chapter{Abstract}
+
+
+In order to show the process of documenting and transfering an API Specification
+from \.NET MVC to another technology stack we will take a random API published on 
+GitHub, document the functionality of the API, generate a suite of unit tests, 
+and replicate the functionality in another technology.
+
+For the API to be documented we will choose the 
+\href{https://github.com/Iamkemical/MovieApp}{MoviaApp}\footnote{https://github.com/Iamkemical/MovieApp}
+repository.  This is an old repository which contains many common \.NET MVC patterns.
+
+For our specifications we will use the \href{https://www.openapis.org/}{OpenAPI} standard for docuemnting 
+the API.  To document the high level (ie integrated) functionality we will use \href{https://cucumber.io/docs/}{Gherkin}.
+Finally, we will also use UML 2.0 \href{https://en.wikipedia.org/wiki/Sequence_diagram}{Sequence Diagrams}.
+This will serve to document the API interfaces (OpenAPI), the interaction and relationships between APIs 
+(Sequence Diagrams), and the expected business or behaviour functionality (Gherkin) of the API.
+
+Once the specifications and requirments are completed we will proceed to build implement the API in a new
+programming language and framework.  In particular, we will develop the API using Rust.  Our unit tests 
+will be developed in the Rust unit test framework.  For integration tests we will use the Gherkin features
+and the Erlang Common Test framework.  Additionally, we will use the OpenAPI specs to automate test 
+generation.
+
+Once unit documentation is complete and unit tests are developed, we will proceed to create an Agile
+backlog, prioritize functionality, and break development into user stories.
+
+\chapter{Analysis}
+
+\input{modules/overview}
+
+\chapter{Requirements}
+
+\chapter{Tests}
+
+\chapter{Implementation}
+
+\end{document}
