@@ -1,4 +1,5 @@
 use cucumber::{given,when,then,World};
+use minigrep;
 
 #[derive(Debug, Default, World)]
 pub struct FileSystemWorld {
@@ -8,24 +9,30 @@ pub struct FileSystemWorld {
     results: Vec<String>
 }
 
-#[given("I have a file called example-filename.txt And it's contents are empty")]
-fn hungry_cat(world: &mut FileSystemWorld) {
-    world.filename = String::from("example-filename.txt");
-    world.contents = String::from("");
+#[given(regex=r"I have a file called (?P<path>[-\w\d_]+\.txt) And it's contents are '(?P<contents>[^']+)?'")]
+fn setup_minigrep(world: &mut FileSystemWorld, path: String, contents: String) {
+    world.filename = path;
+    world.contents = contents;
     world.results = Vec::new();
 }
 
-#[when("I call cargo run -- searchstring example-filename.txt")]
-fn feed_cat(world: &mut FileSystemWorld) {
-    world.searchstring = String::from("searchstring");
-    world.results = vec![String::from("0 matches found")];
+#[when(regex=r"I call cargo run -- (?P<search>[^\W]+) (?P<path>[-\w\d_]+\.txt)")]
+fn run_minigrep(world: &mut FileSystemWorld,search:String,path:String) {
+    world.searchstring = search.clone();
+
+    let args = vec![String::from("./minigrep"),search.to_owned(),path.to_owned()];
+    let mut display: Vec<String> = Vec::new();
+
+    minigrep::search(args,&mut |msg:&str| {
+            display.push(String::from(msg));
+    });
+
+    world.results = display;
 }
 
-#[then("I receive the response 0 matches found")]
-fn cat_is_fed(world: &mut FileSystemWorld) {
-    if let Some(res) = world.results.first() {
-        assert_eq!("0 matches found",res);
-    }
+#[then(regex=r"I receive the response '(?P<expected>[^']+)'")]
+fn cat_is_fed(world: &mut FileSystemWorld, expected:String) {
+    assert_eq!(expected,world.results.join("\\n"),"left is expected and right is actual");
 }
 
 // This runs before everything else, so you can setup things here.

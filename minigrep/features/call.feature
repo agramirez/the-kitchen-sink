@@ -1,6 +1,9 @@
-Feature: Call from command line
+Feature: Pass command line arguments
 
-Scenario: Call via cargo run
-Given I have a file called example-filename.txt And it's contents are empty
-When I call cargo run -- searchstring example-filename.txt
-Then I receive the response 0 matches found
+Scenario: Receive status messages
+Given I have a file called <filepath> And it's contents are '<contents>'
+When I call cargo run -- <searchstring> <filepath>
+Then I receive the response '<result>'
+Examples:
+|filepath|searchstring|contents|result|
+|empty.txt|myword||Searching for myword\nIn file empty.txt|

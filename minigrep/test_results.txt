@@ -1,0 +1,16 @@
+
+running 1 test
+test test::test_search ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+Feature: Call from command line
+  Scenario: Call via cargo run
+   ✔  Given I have a file called example-filename.txt And it's contents are empty
+   ✔  When I call cargo run -- searchstring example-filename.txt
+   ?  Then I receive the response "0 matches found"
+      Step skipped: features/call.feature:6:1
+[Summary]
+1 feature
+1 scenario (1 skipped)
+3 steps (2 passed, 1 skipped)

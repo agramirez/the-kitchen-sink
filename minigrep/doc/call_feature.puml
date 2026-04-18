@@ -1,0 +1,48 @@
+@startuml call_feature
+!theme materia
+skinparam RoundCorner 15
+
+header v0.1.0
+title "Search Feature"
+
+actor "User" as user
+control "minigrep" as minigrep
+
+== Dependency Injection ==
+user -> minigrep : calls minigrep with **<searchstring>** **<filepath>**
+activate minigrep
+minigrep -> config : requests **display**, **reader**
+
+activate config
+config -> minigrep : provides **display**, **reader**
+deactivate config
+
+minigrep -> search : injects **args**, **display**, **reader**
+deactivate minigrep
+activate search
+
+== File Access ==
+search -> reader : request contents of **<filepath>**
+activate reader
+
+alt success
+== Search Success ==
+    reader -> search : provides **<filepath>** contents
+    deactivate reader
+    search -> search : search for **<searchstring>**
+    search -> user : found **X** matches
+    deactivate search
+== File Access Error ==
+else no file
+    reader -> search : Err(FileNotFound)
+    destroy reader
+    search -> user : File not found
+    destroy search
+else unauthorized
+    reader -> search : Err(NotAuthorized)
+    destroy reader
+    search -> user : Unauthorized to open file
+    destroy search
+end
+
+@enduml
