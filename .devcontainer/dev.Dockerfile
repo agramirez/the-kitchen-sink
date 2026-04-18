@@ -80,7 +80,11 @@ RUN sudo apt install -y texlive-full
 RUN sudo apt install -y graphviz
 
 # install plantuml
+ARG PLANTUML_VERSION=1.2026.2
+ENV PLANTUML_URL=https://github.com/plantuml/plantuml/releases/download/v${PLANTUML_VERSION}/plantuml-${PLANTUML_VERSION}.jar
+ENV PLANTUML_DIR=/usr/share/plantuml
 RUN sudo apt install -y plantuml
+RUN sudo wget ${PLANTUML_URL}  -O /usr/share/plantuml/plantuml.jar
 
 # install dotnet
 RUN wget https://packages.microsoft.com/config/debian/13/packages-microsoft-prod.deb -O packages-microsoft-prod.deb && \
