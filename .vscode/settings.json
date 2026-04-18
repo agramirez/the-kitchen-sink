@@ -1,3 +1,4 @@
 {
-    "tlaplus.tlc.modelChecker.options": "-dump dot;colorize ${modelName}.dot -workers 1 -coverage 1"
+    "tlaplus.tlc.modelChecker.options": "-dump dot;colorize ${modelName}.dot -workers 1 -coverage 1",
+    "plantuml.jar": "/usr/local/bin/plantuml.jar"
 }
