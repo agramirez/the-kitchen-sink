@@ -1,3 +1,88 @@
-\subsection{Overview}
+\section{Overview}
 
-Here we will analyze the general architecture of the API.
+Here we will analyze the general architecture of the MoviaApp API.
+
+The code is publicly available on GitHub at \url{https://github.com/Iamkemical/MovieApp}.
+
+It is split into 2 projects API (MoviaApp.API) and Web (MoviaApp.Web), each with 
+a supporting test project (postfixed with \emph{.Test}).
+
+\subsection{MoviaApp API Project}
+
+The MoviaApp API project is \emph{.NET 5 SDK WebApi project}.
+
+It has a SQL Server backend, it's using standard Microsoft.DependencyInjection, 
+and it's configuration file is written in Json.
+
+It has an API definition written in XML
+    \href{https://github.com/Iamkemical/MovieApp/blob/1ef59f7ca86ad67403c93a5fa420106e51651468/MovieApp.API/MovieApp.API.xml}
+    {MovieApp.API/MovieApp.API.xml}.
+
+There are 4 primary controllers with a total of 27 API endpoints.  
+
+\begin{figure}[ht]
+    \caption{Primary Controllers}\label{fig:controllers}
+    \centering
+    \begin{minipage}{0.45\textwidth}
+        \begin{itemize}
+            \item \href{https://github.com/Iamkemical/MovieApp/blob/1ef59f7ca86ad67403c93a5fa420106e51651468/MovieApp.API/Controllers/GenresController.cs}{Genres}
+            \item \href{https://github.com/Iamkemical/MovieApp/blob/1ef59f7ca86ad67403c93a5fa420106e51651468/MovieApp.API/Controllers/MoviesController.cs}{Movies}
+            \item \href{https://github.com/Iamkemical/MovieApp/blob/1ef59f7ca86ad67403c93a5fa420106e51651468/MovieApp.API/Controllers/SubGenresController.cs}{SubGenres}
+            \item \href{https://github.com/Iamkemical/MovieApp/blob/1ef59f7ca86ad67403c93a5fa420106e51651468/MovieApp.API/Controllers/UsersController.cs}{Users}
+        \end{itemize}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.45\textwidth}
+        \includegraphics[width=\linewidth]{images/screenshots/controllers.png}
+    \end{minipage}
+\end{figure}
+
+Reviewing the first controller we can see in figure \ref{fig:controller-items}{Important Controller Items}. 
+That the general API routes are defined as \emph{api/version:apiVersion/Genres} in line 18\footnote{Red highlighted section}.  
+This probably means that \emph{version} is the major version and \emph{apiVersion} is the minor version.
+
+Another important item to note on lines 21 and 42 is the \emph{ProducesResponseType} attribute used to 
+define the return codes and values from the API.  These attributes, along with the docstrings, are used to 
+generate the MovieApp.API.xml file which is the OpenAPI specification. However, it doesn't look like the
+generated XML is up to date or being generated with all of the OpenAPI specs like method type, json result,
+etc.
+
+\begin{figure}[ht]
+    \caption{Important Controller Items}\label{fig:controller-items}
+    \centering
+    \includegraphics[width=\linewidth]{images/screenshots/controller-items.png}
+\end{figure}
+
+Within the method body we can see that the code is calling a repository (specifically the \href{https://github.com/Iamkemical/MovieApp/blob/1ef59f7ca86ad67403c93a5fa420106e51651468/MovieApp.API/Repository/GenreRepository.cs}{GenreRepository})
+implementation of \href{MovieApp.API/Repository/IRepository/IGenreRepository.cs}{IGenreRepository}.
+
+Once the repository returns a list of GenreModel items, they are converted into GenreDTO (Data Transfer Objects).
+The list of DTOs are then returned as the result of the function using the MVC BaseController's Ok method.
+
+This all seems rather standard.  
+
+So, here is the primary structure of the application;
+
+\subsubsection{API}
+
+The API setup configures the loggers, the JWT authentication scheme, 
+and prepares the DI by mapping interfaces to concrete classes.
+
+The Users controller is used for authentication and authorization.
+It allows users to register themselves.
+
+
+\begin{tcolorbox}[colback=blue!5!white, colframe=blue!75!black, title=Question]
+I'm unsure if by default all controllers are secured by 
+the JWT middleware.  I would venture to guess that it should be secured,
+but given that the Users controller has an explicit use of the Authorized
+attribute while the other controllers do not, it makes me suspicious 
+about this...so I will need to test it.
+\end{tcolorbox}
+
+
+
+
+
+
+

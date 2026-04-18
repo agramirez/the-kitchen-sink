@@ -1,0 +1,35 @@
+@startuml 
+title "API Architecture - Authentication and Authorization"
+
+database "MoviaApp Database" {
+    component "Users Table" as userstable
+}
+component "EF Repository" as efrepo {
+    interface "IUserRepo" as iuserrepo
+    component "UserRepo" as userrepo
+}
+component "JWT Middleware" as auth {
+    component "Authorize" as autha
+    component "Authenticate" as autht
+}
+component "API Controllers" as cont {
+    component Users as user {
+    }
+    component Movies as mov
+    component Genres as gen
+    component Subgenres as subgen
+}
+component "Config" as conf {
+    component "Shared Secret Key" as key
+    component "DB Connection" as dbcon
+}
+
+userrepo -left-> userstable : gets
+autht .down.> iuserrepo : calls
+userrepo .down.> iuserrepo : implements
+cont .> autha : uses
+
+autha .up.> key : requires
+userrepo .up.> dbcon : requires
+
+@enduml

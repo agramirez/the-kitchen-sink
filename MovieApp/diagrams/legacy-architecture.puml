@@ -1,0 +1,11 @@
+@startuml
+
+interface "IGenreRepository" as igenre_repo
+[GenreRepository] as genre_repo
+[GenreController] as genre_controller
+
+genre_controller --> igenre_repo
+igenre_repo <-- genre_repo
+
+
+@enduml

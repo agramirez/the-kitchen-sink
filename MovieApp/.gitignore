@@ -1,2 +1,5 @@
 # we'll ignore the pdf since it can be generated from the dev container
 movieapp.pdf
+
+# ignore the locally cloned repository
+MovieApp
