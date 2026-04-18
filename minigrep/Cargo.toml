@@ -1,0 +1,14 @@
+[package]
+name = "minigrep"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+
+[dev-dependencies]
+cucumber = "0.20"
+futures = "0.3"
+
+[[test]]
+name = "call"
+harness = false  # allows Cucumber to print output instead of libtest
