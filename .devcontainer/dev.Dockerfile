@@ -83,6 +83,7 @@ RUN sudo apt install -y graphviz
 ARG PLANTUML_VERSION=1.2026.2
 ENV PLANTUML_URL=https://github.com/plantuml/plantuml/releases/download/v${PLANTUML_VERSION}/plantuml-${PLANTUML_VERSION}.jar
 ENV PLANTUML_DIR=/usr/share/plantuml
+ENV PLANTUML_JAR=$PLANTUML_DIR/plantuml.jar
 RUN sudo apt install -y plantuml
 RUN sudo wget ${PLANTUML_URL}  -O /usr/share/plantuml/plantuml.jar
 
@@ -92,5 +93,11 @@ RUN wget https://packages.microsoft.com/config/debian/13/packages-microsoft-prod
     rm packages-microsoft-prod.deb
 RUN sudo apt-get update && sudo apt-get install -y dotnet-sdk-10.0
 RUN sudo apt-get update && sudo apt-get install -y aspnetcore-runtime-10.0
+
+# install locales
+RUN sudo apt-get install -y locales && locale-gen en_US.UTF-8
+
+# additional setup for plantuml in latex
+RUN sudo tlmgr init-usertree
 
 CMD ["sleep","infinity"]
