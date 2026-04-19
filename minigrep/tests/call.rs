@@ -1,4 +1,4 @@
-use cucumber::{given,when,then,World};
+use cucumber::{given,when,then,World,Step};
 use minigrep;
 
 #[derive(Debug, Default, World)]
@@ -9,8 +9,9 @@ pub struct FileSystemWorld {
     results: Vec<String>
 }
 
-#[given(regex=r"I have a file called (?P<path>[-\w\d_]+\.txt) And it's contents are '(?P<contents>[^']+)?'")]
-fn setup_minigrep(world: &mut FileSystemWorld, path: String, contents: String) {
+#[given(regex=r"(?sm)I have a file called (?P<path>[-\w\d_]+\.txt) And it's contents are (?P<contents>.*)")]
+fn setup_minigrep(world: &mut FileSystemWorld, path:String, contents:String) {
+    //, path: String, contents: String
     world.filename = path;
     world.contents = contents;
     world.results = Vec::new();
@@ -20,11 +21,17 @@ fn setup_minigrep(world: &mut FileSystemWorld, path: String, contents: String) {
 fn run_minigrep(world: &mut FileSystemWorld,search:String,path:String) {
     world.searchstring = search.clone();
 
+    let contents = world.contents.clone();
     let args = vec![String::from("./minigrep"),search.to_owned(),path.to_owned()];
     let mut display: Vec<String> = Vec::new();
 
+    dbg!(&world);
+
     minigrep::search(args,&mut |msg:&str| {
             display.push(String::from(msg));
+    }, |p| {
+        assert_eq!(path.clone(),p,"left is expected, right is actual path passed to reader");
+        Result::Ok(contents.clone())
     });
 
     world.results = display;

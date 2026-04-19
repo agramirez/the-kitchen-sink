@@ -1,5 +1,5 @@
 fn main() {
-    minigrep::search(std::env::args().collect(), |msg| println!("{}",msg));
+    minigrep::search(std::env::args().collect(), |msg| println!("{}",msg),|path| std::fs::read_to_string(path));
 }
 
 #[cfg(test)]
@@ -14,8 +14,10 @@ mod test {
 
         minigrep::search(args,&mut |msg:&str| {
             msgs.push(String::from(msg));
-        });
+        },|path| Ok(String::from("")));
 
-        assert_eq!(2,msgs.len(),"2 messages should be displayed");
+        // [note 2026-04-19]: we only check the total number of messages we expect
+        // since the actual messages are checked in the feature tests
+        assert_eq!(3,msgs.len(),"3 messages should be displayed");
     }
 }
